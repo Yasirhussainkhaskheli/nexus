@@ -20,12 +20,27 @@ function goToSteps() {
 document.addEventListener("DOMContentLoaded", () => {
   /* ── Navbar scroll effect ── */
   const navbar = document.getElementById("navbar");
+  const hero = document.getElementById("hero");
+  const heroVideo = document.getElementById("hero-video");
   window.addEventListener("scroll", () => {
     navbar.classList.toggle("scrolled", window.scrollY > 40);
     document
       .getElementById("backTop")
       .classList.toggle("show", window.scrollY > 400);
   });
+
+  if (hero && heroVideo) {
+    const enableHeroFallback = () => {
+      hero.classList.add("video-fallback");
+    };
+
+    heroVideo.addEventListener("error", enableHeroFallback);
+
+    const source = heroVideo.querySelector("source");
+    if (source) {
+      source.addEventListener("error", enableHeroFallback);
+    }
+  }
 
   /* ── Hamburger ── */
   const hamburger = document.getElementById("hamburger");
@@ -43,23 +58,90 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ── Portfolio filter ── */
   const filterBtns = document.querySelectorAll(".filter-btn");
-  const portfolioItems = document.querySelectorAll(".portfolio-item");
+  const portfolioGrid = document.getElementById("portfolioGrid");
+  const portfolioItems = Array.from(document.querySelectorAll(".portfolio-item"));
+  const portfolioSeeMoreWrap = document.querySelector(".portfolio-see-more");
+  const portfolioSeeMoreBtn = document.getElementById("portfolioSeeMoreBtn");
+  const initialPortfolioRows = 4;
+  const portfolioRowsPerClick = 2;
+  let currentPortfolioFilter = "all";
+  let currentAllRows = initialPortfolioRows;
+
+  function shuffleItems(items) {
+    const shuffled = [...items];
+    for (let i = shuffled.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+
+  const shuffledPortfolioItems = shuffleItems(portfolioItems);
+
+  function getPortfolioColumnCount() {
+    const columns = window.getComputedStyle(portfolioGrid).gridTemplateColumns;
+    return Math.max(columns.split(" ").filter(Boolean).length, 1);
+  }
+
+  function animatePortfolioItem(item) {
+    item.style.animation = "none";
+    item.offsetHeight;
+    item.style.animation = "fadeIn 0.35s ease";
+  }
+
+  function updatePortfolioView() {
+    const sourceItems =
+      currentPortfolioFilter === "all"
+        ? shuffledPortfolioItems
+        : portfolioItems.filter(
+            (item) => item.dataset.category === currentPortfolioFilter,
+          );
+    const visibleLimit =
+      currentPortfolioFilter === "all"
+        ? getPortfolioColumnCount() * currentAllRows
+        : sourceItems.length;
+
+    portfolioItems.forEach((item) => {
+      item.style.display = "none";
+    });
+
+    sourceItems.forEach((item, index) => {
+      item.style.order = index;
+      const shouldShow = index < visibleLimit;
+      item.style.display = shouldShow ? "block" : "none";
+      if (shouldShow) {
+        animatePortfolioItem(item);
+      }
+    });
+
+    const hasMoreItems =
+      currentPortfolioFilter === "all" && visibleLimit < sourceItems.length;
+    portfolioSeeMoreWrap.style.display = hasMoreItems ? "block" : "none";
+  }
+
   filterBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       filterBtns.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
-      const filter = btn.dataset.filter;
-      portfolioItems.forEach((item) => {
-        const match = filter === "all" || item.dataset.category === filter;
-        item.style.display = match ? "block" : "none";
-        if (match) {
-          item.style.animation = "none";
-          item.offsetHeight;
-          item.style.animation = "fadeIn 0.35s ease";
-        }
-      });
+      currentPortfolioFilter = btn.dataset.filter;
+      if (currentPortfolioFilter === "all") {
+        currentAllRows = initialPortfolioRows;
+      }
+      updatePortfolioView();
     });
   });
+
+  portfolioSeeMoreBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    if (currentPortfolioFilter !== "all") {
+      return;
+    }
+    currentAllRows += portfolioRowsPerClick;
+    updatePortfolioView();
+  });
+
+  window.addEventListener("resize", updatePortfolioView);
+  updatePortfolioView();
 
   /* ── Pricing tabs ── */
   const pricingPlans = {
@@ -263,7 +345,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ── Scroll reveal ── */
   const revealEls = document.querySelectorAll(
-    ".service-card, .testimonial-card, .pricing-card, .stat-card, .portfolio-item, .partner-badge",
+    ".service-card, .testimonial-card, .pricing-card, .stat-card, .portfolio-item, .partner-badge, .review-card, .reviews-trustbar",
   );
   const revealObserver = new IntersectionObserver(
     (entries) => {

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -56,9 +56,9 @@
   /* ── PAGE WRAPPER ── */
   .page {
     position: relative; z-index: 5;
-    max-width: 820px;
+    max-width: 1220px;
     margin: 0 auto;
-    padding: 52px 24px 80px;
+    padding: 52px 32px 80px;
   }
 
   /* ── PROGRESS ── */
@@ -85,7 +85,7 @@
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 18px;
-    padding: 40px 40px 32px;
+    padding: 44px 50px 36px;
     backdrop-filter: blur(16px);
     box-shadow: 0 20px 60px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
   }
@@ -102,41 +102,57 @@
     text-transform: uppercase; color: var(--accent2); margin-bottom: 6px;
   }
   .step-heading {
-    font-family: 'Roboto', sans-serif; font-size: 1.5rem; font-weight: 800;
-    color: #fff; margin-bottom: 28px;
+    font-family: 'Roboto', sans-serif; font-size: 1.7rem; font-weight: 800;
+    color: #fff; margin-bottom: 32px;
   }
 
   /* ────────────── STEP 1 – LOGO TYPE ────────────── */
   .logo-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 26px;
+    margin-bottom: 34px;
   }
   .logo-card {
-    border-radius: 10px; overflow: hidden; cursor: pointer;
-    border: 2px solid transparent;
-    transition: border-color .2s, transform .15s;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(147,197,253,0.14);
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    box-shadow: 0 16px 36px rgba(0,0,0,.18);
   }
-  .logo-card:hover { transform: scale(1.03); }
-  .logo-card.selected { border-color: var(--accent2); }
-  .logo-swatch {
-    height: 72px; display: flex; align-items: center; justify-content: center;
-    font-size: .58rem; font-weight: 800; text-align: center;
-    padding: 6px; letter-spacing: .04em; line-height: 1.35;
+  .logo-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(56,189,248,0.45);
   }
-  .ls-1 { background:#f5e6d0; color:#3d2b1a; }
-  .ls-2 { background:#e63d2f; color:#fff; }
-  .ls-3 { background:#0d1b4b; color:#38bdf8; }
-  .ls-4 { background:#6b0e20; color:#f59e0b; }
-  .ls-5 { background:#111;    color:#22c55e; }
-  .ls-6 { background:#500b1a; color:#fcd34d; }
-
-  .type-description {
-    background: rgba(147,197,253,0.05);
-    border: 1px solid rgba(147,197,253,0.1);
-    border-radius: 10px; padding: 14px 16px;
+  .logo-card.selected {
+    border-color: var(--accent2);
+    box-shadow: 0 18px 44px rgba(37,99,235,.2);
   }
-  .type-description h4 { font-family:'Roboto',sans-serif; font-size:.9rem; font-weight:700; margin-bottom:4px; }
-  .type-description p  { font-size:.8rem; color:var(--muted); line-height:1.55; }
+  .logo-preview {
+    width: 100%;
+    aspect-ratio: 1 / 1.08;
+    object-fit: cover;
+    display: block;
+    background: #10163d;
+  }
+  .logo-copy {
+    padding: 20px 20px 22px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  }
+  .logo-copy h4 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .logo-copy p {
+    font-size: .88rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
 
   /* ────────────── STEP 2 – INDUSTRY ────────────── */
   .industry-grid {
@@ -263,17 +279,20 @@
   }
   .success-wrap h2 { font-family:'Roboto',sans-serif; font-size:1.6rem; font-weight:800; color:#fff; margin-bottom:10px; }
   .success-wrap p  { font-size:.9rem; color:var(--muted); line-height:1.7; max-width:420px; margin: 0 auto 28px; }
+  .success-message { color: var(--text); font-weight: 600; }
+
 
   @media(max-width:700px){
     header { padding: 16px 20px; }
     .page  { padding: 32px 16px 60px; }
     .step-card { padding: 28px 20px 24px; }
-    .logo-grid { grid-template-columns: repeat(2,1fr); }
+    .logo-grid { grid-template-columns: repeat(2,1fr); gap: 18px; }
     .industry-grid { grid-template-columns: repeat(3,1fr); }
     .services-grid { grid-template-columns: repeat(2,1fr); }
     .step-heading { font-size: 1.2rem; }
   }
   @media(max-width:420px){
+    .logo-grid { grid-template-columns: 1fr; }
     .industry-grid { grid-template-columns: repeat(2,1fr); }
     .services-grid { grid-template-columns: 1fr 1fr; }
   }
@@ -320,31 +339,51 @@
 
     <!-- ── STEP 1: Logo Type ── -->
     <div class="step active" id="step1">
-      <div class="step-eyebrow">Step 1 — Logo Style</div>
-      <h2 class="step-heading">Please Select Logo Type</h2>
+      <div class="step-eyebrow">Step 1 - Types of the Logo</div>
+      <h2 class="step-heading">Please Select Types of the Logo</h2>
       <div class="logo-grid">
         <div class="logo-card" onclick="selectOne(this,'.logo-card')">
-          <div class="logo-swatch ls-1">GENESIS<br>WORDPRESS THEME</div>
+          <img class="logo-preview" src="assets/abstract.png" alt="Wordmark and typography logo examples" />
+          <div class="logo-copy">
+            <h4>Wordmark &amp; Typography</h4>
+            <p>Text Only logo designs imposes the name of the brand rather than its icon. Used by many luxury brands.</p>
+          </div>
         </div>
         <div class="logo-card" onclick="selectOne(this,'.logo-card')">
-          <div class="logo-swatch ls-2">EOC<br>Erik ONe Call</div>
+          <img class="logo-preview" src="assets/amblem.png" alt="Emblem and crest logo examples" />
+          <div class="logo-copy">
+            <h4>Emblem &amp; Crest</h4>
+            <p>When you want to describe all products in a single design. Used by teams, associations, NGOs, etc</p>
+          </div>
         </div>
         <div class="logo-card" onclick="selectOne(this,'.logo-card')">
-          <div class="logo-swatch ls-3">AR<br>ARCTIC ROCK</div>
+          <img class="logo-preview" src="assets/calligraphy.png" alt="Handwritten and calligraphy logo examples" />
+          <div class="logo-copy">
+            <h4>Handwritten &amp; Calligraphy</h4>
+            <p>When you want to display artistic and stylish image of brand. Used by clothing, beauty, etc brands.</p>
+          </div>
         </div>
         <div class="logo-card" onclick="selectOne(this,'.logo-card')">
-          <div class="logo-swatch ls-4">Saffron</div>
+          <img class="logo-preview" src="assets/illustrative.png" alt="Illustration logo examples" />
+          <div class="logo-copy">
+            <h4>Illustration</h4>
+            <p>Image and text are used together to express the company message. Used by most of the brands.</p>
+          </div>
         </div>
         <div class="logo-card" onclick="selectOne(this,'.logo-card')">
-          <div class="logo-swatch ls-5">CSF</div>
+          <img class="logo-preview" src="assets/initials-&-lettermark.png" alt="Business initial and lettermark logo examples" />
+          <div class="logo-copy">
+            <h4>Business Initial &amp; Lettermark</h4>
+            <p>Pictorial representation with brand/company name's initials or its first letter. Common among corporates.</p>
+          </div>
         </div>
         <div class="logo-card" onclick="selectOne(this,'.logo-card')">
-          <div class="logo-swatch ls-6">HAMILTON</div>
+          <img class="logo-preview" src="assets/initials-&-lettermark.png" alt="Pictorial and iconic logo examples" />
+          <div class="logo-copy">
+            <h4>Pictorial &amp; Iconic</h4>
+            <p>The new talk of the town in logo designing. Follows minimalism and simplicity!</p>
+          </div>
         </div>
-      </div>
-      <div class="type-description">
-        <h4>Wordmark &amp; Typography</h4>
-        <p>Text Only logo designs impose the name of the brand rather than its icon. Used by many luxury brands.</p>
       </div>
       <div class="nav-row">
         <button class="btn-next" onclick="goStep(2)">Continue →</button>
@@ -451,9 +490,9 @@
         <input type="email" id="bizEmail" placeholder="Email Address"/>
       </div>
       <div class="field">
-  <label>Phone Number <span style="color:#ef4444">*</span></label>
-  <input type="tel" id="bizPhone" placeholder="Phone Number"/>
-  <span class="error-msg" id="phoneError">⚠ Please enter a valid phone number</span>
+  <label>Mobile No <span style="color:#ef4444">*</span></label>
+  <input type="tel" id="bizPhone" placeholder="Mobile No"/>
+  <span class="error-msg" id="phoneError">⚠ Please enter a valid mobile number</span>
 </div>
       <div class="nav-row">
         <button class="btn-back" onclick="goStep(3)">← Back</button>
@@ -466,11 +505,11 @@
 
   <!-- SUCCESS -->
   <div class="success-wrap" id="successWrap">
-    <div class="success-icon">✅</div>
+    <div class="success-icon">OK</div>
     <h2>You're All Set!</h2>
-    <p>Our team will reach out within 24 hours with your <strong>custom logo proposal</strong> and your <strong>50% discount</strong> applied automatically.</p>
+    <p class="success-message">Connecting you to the live agent now!</p>
     <button class="btn-next" style="max-width:260px;margin:0 auto;" onclick="window.location.href='index.html'">
-      ← Back to Home
+      Back to Home
     </button>
   </div>
 
@@ -549,7 +588,6 @@ function selectOne(el, selector) {
   el.classList.add('selected');
 }
 function toggleSelect(el) { el.classList.toggle('selected'); }
-
 function submitForm() {
   const phone = document.getElementById('bizPhone');
   const phoneError = document.getElementById('phoneError');
@@ -575,3 +613,6 @@ function submitForm() {
 </script>
 </body>
 </html>
+
+
+

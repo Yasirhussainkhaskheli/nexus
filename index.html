@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      NexusDigital — Grow Your Business with Powerful Digital Solutions
+    </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ───────────────── NAVBAR ───────────────── -->
+    <nav class="navbar" id="navbar">
+      <div class="container">
+        <div class="nav-inner">
+          <a href="#" class="nav-logo">Nexus Digital</a>
+          <ul class="nav-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <div class="nav-cta">
+            <a href="#contact" class="btn btn-primary">Start My Project</a>
+          </div>
+          <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#services" class="mobile-link">Services</a>
+        <a href="#portfolio" class="mobile-link">Portfolio</a>
+        <a href="#pricing" class="mobile-link">Pricing</a>
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#contact" class="mobile-link">Contact</a>
+        <a href="#contact" class="btn btn-primary">Start My Project</a>
+      </div>
+    </nav>
+
+    <!-- ───────────────── HERO ───────────────── -->
+   <section class="hero" id="hero">
+  <video id="hero-video" autoplay muted loop playsinline>
+    <source src="assets/banner-video.mp4" type="video/mp4" />
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-badge">
+          <i class="fa-solid fa-circle-dot"></i>
+          Home &nbsp;/&nbsp; Digital Agency Business
+        </div>
+        <h1 class="hero-title">
+          Grow Your Business<br />
+          with
+          <span class="gradient-text">Powerful</span>
+          <span class="underline-accent"> Branding</span><br />
+          &amp; Digital Solutions
+        </h1>
+        <p class="hero-sub">
+          <strong>We Design. We Develop. We Market.</strong><br />
+          Partner with NexusDigital and watch your brand dominate the
+          digital space — faster than ever.
+        </p>
+        <div class="logo-widget-wrap">
+          <div class="widget-wrap">
+            <div class="pencil-icon">✏️</div>
+            <input
+  class="name-input"
+  type="text"
+  id="companyInput"
+  placeholder="Enter Your Company Name Here"
+  autofocus
+/>
+            <button class="cta-btn" onclick="goToSteps()">GET MY CUSTOM LOGO</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- ───────────────── SERVICES ───────────────── -->
+   <section class="services" id="services">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">What We Do</span>
+      <h2 class="section-title">Our Services</h2>
+      <p class="section-sub">
+        End-to-end digital solutions to launch, grow, and dominate your
+        market with confidence.
+      </p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card t-blue">
+        <div class="service-icon"><i class="fa-solid fa-gem"></i></div>
+        <h3>Logo Design</h3>
+        <p>Memorable brand identities that make lasting impressions and set you apart from competitors.</p>
+        <div class="service-card-actions">
+          <a href="#contact" class="btn btn-primary">Get Free Quote</a>
+          <a href="#contact" class="link-btn">Talk to Expert <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="service-card t-green">
+        <div class="service-icon"><i class="fa-solid fa-code"></i></div>
+        <h3>Website Development</h3>
+        <p>Stunning, fast, conversion-optimized websites built with cutting-edge technology.</p>
+        <div class="service-card-actions">
+          <a href="#contact" class="btn btn-primary">Get Free Quote</a>
+          <a href="#contact" class="link-btn">Talk to Expert <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="service-card t-amber">
+        <div class="service-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+        <h3>SEO Services</h3>
+        <p>Rank higher on Google and drive organic traffic that converts into paying customers.</p>
+        <div class="service-card-actions">
+          <a href="#contact" class="btn btn-primary">Get Free Quote</a>
+          <a href="#contact" class="link-btn">Talk to Expert <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="service-card t-red">
+        <div class="service-icon"><i class="fa-brands fa-google"></i></div>
+        <h3>SEM / Google Ads</h3>
+        <p>Data-driven paid campaigns that maximize ROI and deliver qualified leads instantly.</p>
+        <div class="service-card-actions">
+          <a href="#contact" class="btn btn-primary">Get Free Quote</a>
+          <a href="#contact" class="link-btn">Talk to Expert <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="service-card t-purple">
+        <div class="service-icon"><i class="fa-solid fa-hashtag"></i></div>
+        <h3>Social Media Marketing</h3>
+        <p>Engage your audience, build community, and turn followers into loyal customers.</p>
+        <div class="service-card-actions">
+          <a href="#contact" class="btn btn-primary">Get Free Quote</a>
+          <a href="#contact" class="link-btn">Talk to Expert <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="service-card t-teal">
+        <div class="service-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+        <h3>Mobile App Development</h3>
+        <p>Native & cross-platform apps with intuitive UX that users love and keep coming back to.</p>
+        <div class="service-card-actions">
+          <a href="#contact" class="btn btn-primary">Get Free Quote</a>
+          <a href="#contact" class="link-btn">Talk to Expert <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="service-card t-pink">
+        <div class="service-icon"><i class="fa-solid fa-film"></i></div>
+        <h3>2D & 3D Animation</h3>
+        <p>Eye-catching animations that tell your brand story and captivate your audience.</p>
+        <div class="service-card-actions">
+          <a href="#contact" class="btn btn-primary">Get Free Quote</a>
+          <a href="#contact" class="link-btn">Talk to Expert <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="service-card t-indigo">
+        <div class="service-icon"><i class="fa-solid fa-palette"></i></div>
+        <h3>Brand Identity Design</h3>
+        <p>Complete brand systems including color palettes, typography, and visual guidelines that create a strong, consistent brand presence across all platforms.</p>
+        <div class="service-card-actions">
+          <a href="#contact" class="btn btn-primary">Get Free Quote</a>
+          <a href="#contact" class="link-btn">Talk to Expert <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="service-card t-cyan">
+        <div class="service-icon"><i class="fa-solid fa-object-group"></i></div>
+        <h3>UI / UX Design</h3>
+        <p>User-focused interface and experience design that makes your website or app intuitive, engaging, and optimized for conversions.</p>
+        <div class="service-card-actions">
+          <a href="#contact" class="btn btn-primary">Get Free Quote</a>
+          <a href="#contact" class="link-btn">Talk to Expert <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+    <!-- ───────────────── PORTFOLIO ───────────────── -->
+  <section class="portfolio" id="portfolio">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">Our Work</span>
+      <h2 class="section-title">Portfolio</h2>
+      <p class="section-sub">
+        A glimpse of the brands we've built and the digital experiences
+        we've crafted.
+      </p>
+    </div>
+    <div class="portfolio-filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="logos">Logos</button>
+      <button class="filter-btn" data-filter="websites">Websites</button>
+    </div>
+    <div class="portfolio-grid" id="portfolioGrid">
+      <div class="portfolio-item" data-category="logos">
+        <div class="thumb" style="background-image: url('assets/logo-1.jpg'); background-size: cover; background-position: center;"></div>
+        <div class="overlay">
+          <span class="overlay-tag">LOGO</span>
+          <span class="overlay-title">Seven Days</span>
+        </div>
+      </div>
+      <div class="portfolio-item" data-category="logos">
+        <div class="thumb" style="background-image: url('assets/logo-2.png'); background-size: cover; background-position: center;"></div>
+        <div class="overlay">
+          <span class="overlay-tag">LOGO</span>
+          <span class="overlay-title">Gentle Gaint Studio</span>
+        </div>
+      </div>
+      <div class="portfolio-item" data-category="logos">
+        <div class="thumb" style="background-image: url('assets/logo-3.jpg'); background-size: cover; background-position: center;"></div>
+        <div class="overlay">
+          <span class="overlay-tag">LOGO</span>
+          <span class="overlay-title">Mission Mama Bear</span>
+        </div>
+      </div>
+      <div class="portfolio-item" data-category="logos">
+        <div class="thumb" style="background-image: url('assets/logo-4.png'); background-size: cover; background-position: center;"></div>
+        <div class="overlay">
+          <span class="overlay-tag">LOGO</span>
+          <span class="overlay-title">Tell Me When</span>
+        </div>
+      </div>
+      <div class="portfolio-item" data-category="websites">
+        <div class="thumb" style="background-image: url('assets/website-1.png'); background-size: cover; background-position: center;"></div>
+        <div class="overlay">
+          <span class="overlay-tag">WEBSITE</span>
+          <span class="overlay-title">Royal Nuts</span>
+        </div>
+      </div>
+      <div class="portfolio-item" data-category="websites">
+        <div class="thumb" style="background-image: url('assets/website-2.png'); background-size: cover; background-position: center;"></div>
+        <div class="overlay">
+          <span class="overlay-tag">WEBSITE</span>
+          <span class="overlay-title">JB Bees</span>
+        </div>
+      </div>
+      <div class="portfolio-item" data-category="websites">
+        <div class="thumb" style="background-image: url('assets/website-3.png'); background-size: cover; background-position: center;"></div>
+        <div class="overlay">
+          <span class="overlay-tag">WEBSITE</span>
+          <span class="overlay-title">Crown Roofing</span>
+        </div>
+      </div>
+      <div class="portfolio-item" data-category="websites">
+        <div class="thumb" style="background-image: url('assets/website-4.png'); background-size: cover; background-position: center;"></div>
+        <div class="overlay">
+          <span class="overlay-tag">WEBSITE</span>
+          <span class="overlay-title">Sound Veterinary Care</span>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-see-more">
+      <a href="#">See More Work <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+    <!-- ───────────────── TESTIMONIALS ───────────────── -->
+    <section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">Testimonials</span>
+      <h2 class="section-title">
+        Trusted by <span style="color: var(--primary)">1,000+</span><br />Businesses Worldwide
+      </h2>
+      <p class="section-sub">
+        Real results, real clients. Here's what our partners say about working with NexusDigital.
+      </p>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_1?rel=0" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background: linear-gradient(135deg, #3b82f6, #06b6d4)">JM</div>
+          <div class="author-info">
+            <h4>James Mitchell</h4>
+            <span>CEO, BrightPath Solutions — USA</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_1?rel=0" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background: linear-gradient(135deg, #3b82f6, #06b6d4)">JM</div>
+          <div class="author-info">
+            <h4>Sophie Reynolds</h4>
+            <span>Founder, The Bloom Boutique — UK</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_1?rel=0" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background: linear-gradient(135deg, #3b82f6, #06b6d4)">JM</div>
+          <div class="author-info">
+            <h4>Ahmad Khan</h4>
+            <span>Director, Pinnacle Ventures — Canada</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- ───────────────── PARTNERS ───────────────── -->
+    <section class="partners" id="partners">
+  <div class="container-partners">
+    <h2>Work With Certified Experts</h2>
+    <div class="partners-logos">
+
+      <div class="partner-badge t-google">
+        <div class="partner-badge-icon google">
+          <i class="fa-brands fa-google"></i>
+        </div>
+        <div>
+          <h4>Google Partners</h4>
+          <span>Certified Agency Partner</span>
+        </div>
+      </div>
+
+      <div class="partner-badge t-meta">
+        <div class="partner-badge-icon meta">
+          <i class="fa-brands fa-meta"></i>
+        </div>
+        <div>
+          <h4>Meta Pro Partner</h4>
+          <span>Certified Meta Business</span>
+        </div>
+      </div>
+
+      <div class="partner-badge t-linkedin">
+        <div class="partner-badge-icon" style="background: linear-gradient(135deg, #0a66c2, #0077b5)">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </div>
+        <div>
+          <h4>LinkedIn Marketing</h4>
+          <span>Certified Solutions Partner</span>
+        </div>
+      </div>
+
+      <div class="partner-badge t-shopify">
+        <div class="partner-badge-icon" style="background: linear-gradient(135deg, #96bf48, #5e8e3e)">
+          <i class="fa-brands fa-shopify"></i>
+        </div>
+        <div>
+          <h4>Shopify Partner</h4>
+          <span>Certified Expert</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+    <!-- ───────────────── PRICING ───────────────── -->
+   <section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">Pricing</span>
+      <h2 class="section-title">Transparent Packages</h2>
+      <p class="section-sub">
+        All prices include the 70% launch discount — no hidden fees, no
+        surprises.
+      </p>
+    </div>
+
+    <div class="pricing-tabs">
+      <button class="pricing-tab active" data-plan="logo">
+        Logo Packages
+      </button>
+      <button class="pricing-tab" data-plan="website">
+        Website Packages
+      </button>
+      <button class="pricing-tab" data-plan="marketing">
+        Marketing Packages
+      </button>
+    </div>
+
+    <div class="pricing-grid" id="pricingGrid">
+      <!-- Basic -->
+      <div class="pricing-card">
+        <div class="pricing-plan">Basic</div>
+        <div class="pricing-amount">
+          <span class="currency">$</span>
+          <span class="price" data-target="90">90</span>
+          <span class="period">&nbsp;/mo</span>
+        </div>
+        <p class="old-price">Was $299/mo — 70% off today</p>
+        <hr class="pricing-divider" />
+        <ul class="pricing-features">
+          <li><i class="fa-solid fa-circle-check"></i> 3 Logo Concepts</li>
+          <li><i class="fa-solid fa-circle-check"></i> 2 Revision Rounds</li>
+          <li><i class="fa-solid fa-circle-check"></i> All File Formats (PNG, SVG, PDF)</li>
+          <li><i class="fa-solid fa-circle-check"></i> Brand Color Palette</li>
+          <li><i class="fa-solid fa-circle-check"></i> 5-Day Delivery</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">Order Now</a>
+      </div>
+
+      <!-- Standard (Featured) -->
+      <div class="pricing-card featured">
+        <div class="popular-badge">
+          <i class="fa-solid fa-fire"></i>&nbsp; Most Popular
+        </div>
+        <div class="pricing-plan">Standard</div>
+        <div class="pricing-amount">
+          <span class="currency">$</span>
+          <span class="price">180</span>
+          <span class="period">&nbsp;/mo</span>
+        </div>
+        <p class="old-price">Was $599/mo — 70% off today</p>
+        <hr class="pricing-divider" />
+        <ul class="pricing-features">
+          <li><i class="fa-solid fa-circle-check"></i> 6 Logo Concepts</li>
+          <li><i class="fa-solid fa-circle-check"></i> Unlimited Revisions</li>
+          <li><i class="fa-solid fa-circle-check"></i> Full Brand Identity Kit</li>
+          <li><i class="fa-solid fa-circle-check"></i> Business Card Design</li>
+          <li><i class="fa-solid fa-circle-check"></i> Social Media Kit</li>
+          <li><i class="fa-solid fa-circle-check"></i> Brand Style Guide</li>
+          <li><i class="fa-solid fa-circle-check"></i> 3-Day Priority Delivery</li>
+        </ul>
+        <a href="#contact" class="btn">Order Now</a>
+      </div>
+
+      <!-- Premium -->
+      <div class="pricing-card">
+        <div class="pricing-plan">Premium</div>
+        <div class="pricing-amount">
+          <span class="currency">$</span>
+          <span class="price">300</span>
+          <span class="period">&nbsp;/mo</span>
+        </div>
+        <p class="old-price">Was $999/mo — 70% off today</p>
+        <hr class="pricing-divider" />
+        <ul class="pricing-features">
+          <li><i class="fa-solid fa-circle-check"></i> 10 Logo Concepts</li>
+          <li><i class="fa-solid fa-circle-check"></i> Unlimited Revisions</li>
+          <li><i class="fa-solid fa-circle-check"></i> Complete Brand Identity</li>
+          <li><i class="fa-solid fa-circle-check"></i> Full Stationery Design</li>
+          <li><i class="fa-solid fa-circle-check"></i> 3D Logo Mockups</li>
+          <li><i class="fa-solid fa-circle-check"></i> Motion Logo Animation</li>
+          <li><i class="fa-solid fa-circle-check"></i> Dedicated Brand Manager</li>
+          <li><i class="fa-solid fa-circle-check"></i> Same-Day Rush Delivery</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">Order Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- ───────────────── ABOUT ───────────────── -->
+    <section class="about" id="about">
+      <div class="container">
+        <div class="about-inner">
+          <div class="about-left">
+            <span class="section-label">About Us</span>
+            <h2 class="section-title">Results-Driven<br />Digital Agency</h2>
+            <p>
+              NexusDigital is a full-service creative and digital marketing
+              agency founded to help ambitious businesses scale through smart
+              design, powerful technology, and data-driven marketing. We've
+              helped over 1,000 brands across the USA, UK, Canada, and Australia
+              grow their digital footprint and generate real revenue.
+            </p>
+            <p>
+              From startups to established enterprises, we bring the same level
+              of passion and precision to every project — because your success
+              is our success.
+            </p>
+            <ul class="about-bullets">
+              <li>
+                <div class="bullet-dot"></div>
+                Mission-driven approach focused on measurable outcomes
+              </li>
+              <li>
+                <div class="bullet-dot"></div>
+                USA &amp; UK market specialists with deep industry knowledge
+              </li>
+              <li>
+                <div class="bullet-dot"></div>
+                Dedicated project manager for every client engagement
+              </li>
+              <li>
+                <div class="bullet-dot"></div>
+                Data-driven strategies that maximize ROI at every stage
+              </li>
+            </ul>
+          </div>
+          <div class="about-right">
+            <div class="stat-cards">
+              <div class="stat-card">
+                <div class="stat-number" id="statYears">0+</div>
+                <div class="stat-label">Years<br />Experience</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number" id="statClients">0+</div>
+                <div class="stat-label">Happy<br />Clients</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number" id="statProjects">0+</div>
+                <div class="stat-label">Projects<br />Delivered</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number" id="statRating">0</div>
+                <div class="stat-label">Average<br />Rating</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────── CONTACT ───────────────── -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-label">Get In Touch</span>
+          <h2 class="section-title">Book Your Free Consultation</h2>
+          <p class="section-sub">
+            Tell us about your project and we'll get back to you within 24 hours
+            with a custom growth plan — no strings attached.
+          </p>
+        </div>
+        <form class="contact-form" onsubmit="handleContactSubmit(event)">
+          <input type="text" placeholder="Full Name" required />
+          <input type="email" placeholder="Email Address" required />
+          <input type="tel" placeholder="Phone Number" />
+          <select>
+            <option value="" disabled selected>Business Type</option>
+            <option>E-Commerce</option>
+            <option>SaaS / Tech</option>
+            <option>Local Business</option>
+            <option>Healthcare</option>
+            <option>Real Estate</option>
+            <option>Education</option>
+            <option>Finance</option>
+            <option>Other</option>
+          </select>
+          <textarea
+            class="full"
+            placeholder="Tell us about your project and goals..."
+          ></textarea>
+          <div class="contact-submit full">
+            <button type="submit" class="btn btn-primary">
+              <i class="fa-solid fa-calendar-check"></i>&nbsp; Book Free
+              Consultation
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ───────────────── FOOTER ───────────────── -->
+    <footer class="footer" id="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-brand">
+            <a href="#" class="footer-logo">Nexus<span>.</span></a>
+            <p class="footer-tagline">
+              We are a results-driven digital agency helping ambitious
+              businesses design, develop, and dominate their markets with
+              world-class digital solutions.
+            </p>
+            <div class="footer-social">
+              <a href="#" class="social-btn"
+                ><i class="fa-brands fa-facebook-f"></i
+              ></a>
+              <a href="#" class="social-btn"
+                ><i class="fa-brands fa-x-twitter"></i
+              ></a>
+              <a href="#" class="social-btn"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+              <a href="#" class="social-btn"
+                ><i class="fa-brands fa-linkedin-in"></i
+              ></a>
+              <a href="#" class="social-btn"
+                ><i class="fa-brands fa-youtube"></i
+              ></a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#hero">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#portfolio">Portfolio</a></li>
+              <li><a href="#pricing">Pricing</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Terms &amp; Conditions</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Refund Policy</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <div class="footer-contact-item">
+              <i class="fa-solid fa-envelope"></i>
+              <span>hello@nexusdigital.com</span>
+            </div>
+            <div class="footer-contact-item">
+              <i class="fa-solid fa-phone"></i>
+              <span>+1 (888) 123-4567</span>
+            </div>
+            <div class="footer-contact-item">
+              <i class="fa-brands fa-whatsapp"></i>
+              <span>+44 7700 900000</span>
+            </div>
+            <div class="footer-contact-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <span
+                >123 Digital Avenue, Suite 500<br />New York, NY 10001,
+                USA</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div class="container">
+          <p>
+            &copy; 2026 <span>NexusDigital</span>. All rights reserved. Crafted
+            with
+            <i
+              class="fa-solid fa-heart"
+              style="color: #ef4444; font-size: 11px"
+            ></i>
+            for ambitious brands.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Floating chat -->
+    <a href="#contact" class="floating-chat">
+      <i class="fa-solid fa-comments"></i>
+      Chat With Us
+    </a>
+
+    <!-- Back to top -->
+    <a href="#" class="back-top" id="backTop">
+      <i class="fa-solid fa-chevron-up"></i>
+    </a>
+
+    <script src="script.js"></script>
+    
+    <div id="customAlert" class="custom-alert-overlay" onclick="closeAlert()">
+  <div class="custom-alert-box" onclick="event.stopPropagation()">
+    <div class="alert-icon">✏️</div>
+    <h3 class="alert-title">Oops, missing something!</h3>
+    <p class="alert-msg">Please enter your company name to get your custom logo.</p>
+    <button class="alert-btn" onclick="closeAlert()">Got it</button>
+  </div>
+</div>
+  </body>
+</html>

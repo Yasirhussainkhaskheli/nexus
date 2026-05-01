@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Build Your Logo – NexusDigital</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy:       #05082e;
+    --navy2:      #080c3a;
+    --accent:     #2563eb;
+    --accent2:    #38bdf8;
+    --cyan:       #06b6d4;
+    --orange:     hsl(217 91% 50%);
+    --orange-dk:  hsl(217 91% 45%);
+    --text:       #f0f6ff;
+    --muted:      #94a3b8;
+    --card-bg:    rgba(186,219,255,0.07);
+    --card-border:rgba(147,197,253,0.18);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: var(--navy);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── CANVAS ── */
+  #particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+  /* ── GLOWS ── */
+  .glow { position: fixed; border-radius: 50%; filter: blur(90px); pointer-events: none; z-index: 0; opacity: .15; }
+  .g1 { width: 500px; height: 500px; background: #1d4ed8; top: -120px; left: -120px; }
+  .g2 { width: 380px; height: 380px; background: #06b6d4; bottom: -60px; right: 100px; }
+  .g3 { width: 280px; height: 280px; background: hsl(217 91% 50%); top: 45%; right: -60px; }
+
+  /* ── HEADER ── */
+  header {
+    position: relative; z-index: 20;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 60px;
+    border-bottom: 1px solid rgba(147,197,253,0.08);
+    backdrop-filter: blur(8px);
+  }
+  .logo-link { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-icon { width: 40px; height: 40px; background: var(--orange); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .logo-text { font-family: 'Roboto', sans-serif; font-weight: 800; font-size: 1.05rem; color: #fff; }
+  .logo-text span { color: var(--accent2); }
+  .hdr-phone { display: flex; align-items: center; gap: 7px; color: var(--accent2); font-size: .9rem; font-weight: 600; text-decoration: none; }
+
+  /* ── PAGE WRAPPER ── */
+  .page {
+    position: relative; z-index: 5;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 52px 24px 80px;
+  }
+
+  /* ── PROGRESS ── */
+  .progress-block { margin-bottom: 40px; }
+  .step-indicators {
+    display: flex; gap: 8px; align-items: center; margin-bottom: 14px;
+  }
+  .step-dot {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 2px solid rgba(147,197,253,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: .72rem; font-weight: 700; color: var(--muted);
+    transition: all .3s;
+  }
+  .step-dot.done  { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .step-dot.active{ background: var(--orange); border-color: var(--orange); color: #fff; }
+  .step-line { flex: 1; height: 2px; background: rgba(147,197,253,0.1); border-radius: 99px; overflow: hidden; }
+  .step-line-fill { height: 100%; background: linear-gradient(90deg,var(--accent),var(--cyan)); border-radius: 99px; transition: width .4s; }
+
+  .progress-meta { display: flex; justify-content: space-between; font-size: .75rem; color: var(--muted); }
+
+  /* ── STEP CARD ── */
+  .step-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    padding: 40px 40px 32px;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 20px 60px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
+  }
+
+  .step { display: none; animation: fadeUp .3s ease; }
+  .step.active { display: block; }
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(10px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  .step-eyebrow {
+    font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--accent2); margin-bottom: 6px;
+  }
+  .step-heading {
+    font-family: 'Roboto', sans-serif; font-size: 1.5rem; font-weight: 800;
+    color: #fff; margin-bottom: 28px;
+  }
+
+  /* ────────────── STEP 1 – LOGO TYPE ────────────── */
+  .logo-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    margin-bottom: 20px;
+  }
+  .logo-card {
+    border-radius: 10px; overflow: hidden; cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color .2s, transform .15s;
+  }
+  .logo-card:hover { transform: scale(1.03); }
+  .logo-card.selected { border-color: var(--accent2); }
+  .logo-swatch {
+    height: 72px; display: flex; align-items: center; justify-content: center;
+    font-size: .58rem; font-weight: 800; text-align: center;
+    padding: 6px; letter-spacing: .04em; line-height: 1.35;
+  }
+  .ls-1 { background:#f5e6d0; color:#3d2b1a; }
+  .ls-2 { background:#e63d2f; color:#fff; }
+  .ls-3 { background:#0d1b4b; color:#38bdf8; }
+  .ls-4 { background:#6b0e20; color:#f59e0b; }
+  .ls-5 { background:#111;    color:#22c55e; }
+  .ls-6 { background:#500b1a; color:#fcd34d; }
+
+  .type-description {
+    background: rgba(147,197,253,0.05);
+    border: 1px solid rgba(147,197,253,0.1);
+    border-radius: 10px; padding: 14px 16px;
+  }
+  .type-description h4 { font-family:'Roboto',sans-serif; font-size:.9rem; font-weight:700; margin-bottom:4px; }
+  .type-description p  { font-size:.8rem; color:var(--muted); line-height:1.55; }
+
+  /* ────────────── STEP 2 – INDUSTRY ────────────── */
+  .industry-grid {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;
+  }
+  .ind-item {
+    display: flex; flex-direction: column; align-items: center; gap: 7px;
+    padding: 12px 6px; border-radius: 11px;
+    border: 1.5px solid rgba(147,197,253,0.1);
+    background: rgba(15,23,80,0.4); cursor: pointer;
+    transition: border-color .2s, background .2s;
+  }
+  .ind-item:hover, .ind-item.selected {
+    border-color: var(--orange); background: rgba(249,115,22,0.09);
+  }
+  .ind-icon {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 1.5px solid var(--orange);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .ind-item span { font-size: .58rem; font-weight: 500; text-align: center; color: var(--text); line-height: 1.3; }
+
+  /* ────────────── STEP 3 – SERVICES ────────────── */
+  .services-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+  }
+  .svc-card {
+    border-radius: 11px; overflow: hidden; cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color .2s, transform .15s;
+    background: rgba(15,23,80,0.5);
+  }
+  .svc-card:hover { transform: translateY(-2px); }
+  .svc-card.selected { border-color: var(--accent2); }
+  .svc-thumb {
+    height: 70px; display: flex; align-items: center;
+    justify-content: center; font-size: 1.7rem;
+  }
+  .svc-info { padding: 9px 10px 11px; }
+  .svc-info h4 { font-size: .78rem; font-weight: 700; color: #fff; }
+  .svc-info p  { font-size: .65rem; color: var(--muted); margin-top: 2px; }
+  .t-logo    { background: linear-gradient(135deg,#1e293b,#334155); }
+  .t-brand   { background: linear-gradient(135deg,#1e3a5f,#2d5a8e); }
+  .t-web     { background: linear-gradient(135deg,#fbbf24,#f59e0b); }
+  .t-biz     { background: linear-gradient(135deg,#06b6d4,#0891b2); }
+  .t-app     { background: linear-gradient(135deg,#6366f1,#4f46e5); }
+  .t-mkt     { background: linear-gradient(135deg, hsl(217 91% 50%), hsl(217 91% 45%)); }
+  .t-lanim   { background: linear-gradient(135deg,#10b981,#059669); }
+  .t-vanim   { background: linear-gradient(135deg,#8b5cf6,#7c3aed); }
+
+  /* ────────────── STEP 4 – BUSINESS INFO ────────────── */
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: .72rem; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+  .field input, .field textarea {
+    width: 100%; background: rgba(15,23,80,0.5);
+    border: 1.5px solid rgba(147,197,253,0.15);
+    border-radius: 9px; padding: 13px 15px;
+    color: var(--text); font-family: 'Roboto', sans-serif; font-size: .88rem;
+    outline: none; transition: border-color .2s;
+  }
+  .field input:focus, .field textarea:focus { border-color: var(--accent2); }
+  .field input::placeholder, .field textarea::placeholder { color: var(--muted); }
+  .field textarea { resize: vertical; min-height: 90px; }
+  .field input.error { border-color: #ef4444; animation: shake 0.35s ease; }
+.field .error-msg { font-size: .7rem; color: #ef4444; margin-top: 5px; display: none; }
+.field .error-msg.show { display: block; }
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  20%      { transform: translateX(-6px); }
+  40%      { transform: translateX(6px); }
+  60%      { transform: translateX(-4px); }
+  80%      { transform: translateX(4px); }
+}
+
+  /* ── NAV ── */
+  .nav-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 32px; gap: 12px;
+  }
+  .btn-back {
+    background: rgba(147,197,253,0.07); border: 1px solid rgba(147,197,253,0.15);
+    color: var(--muted); padding: 11px 22px; border-radius: 9px;
+    font-family: 'Roboto', sans-serif; font-size: .84rem; font-weight: 600;
+    cursor: pointer; transition: border-color .2s, color .2s;
+  }
+  .btn-back:hover { border-color: var(--accent2); color: var(--text); }
+  .btn-next {
+    flex: 1; background: var(--accent); color: #fff;
+    border: none; padding: 13px 28px; border-radius: 9px;
+    font-family: 'Roboto', sans-serif; font-size: .88rem; font-weight: 700;
+    cursor: pointer; transition: background .2s, transform .15s;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .btn-next:hover { background: #1d4ed8; transform: translateY(-1px); }
+  .btn-submit {
+    flex: 1; background: linear-gradient(135deg, var(--orange), var(--orange-dk));
+    color: #fff; border: none; padding: 13px 28px; border-radius: 9px;
+    font-family: 'Roboto', sans-serif; font-size: .88rem; font-weight: 700;
+    cursor: pointer; transition: opacity .2s, transform .15s;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .btn-submit:hover { opacity: .9; transform: translateY(-1px); }
+
+  .skip-row { text-align: center; margin-top: 14px; }
+  .skip-btn {
+    background: none; border: none; cursor: pointer;
+    font-size: .75rem; color: var(--muted); text-decoration: underline;
+    text-underline-offset: 3px; transition: color .2s;
+  }
+  .skip-btn:hover { color: var(--text); }
+
+  /* ── SUCCESS ── */
+  .success-wrap {
+    text-align: center; padding: 40px 20px;
+    display: none; animation: fadeUp .4s ease;
+  }
+  .success-wrap.active { display: block; }
+  .success-icon {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: rgba(37,99,235,0.15); border: 2px solid var(--accent2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.2rem; margin: 0 auto 20px;
+  }
+  .success-wrap h2 { font-family:'Roboto',sans-serif; font-size:1.6rem; font-weight:800; color:#fff; margin-bottom:10px; }
+  .success-wrap p  { font-size:.9rem; color:var(--muted); line-height:1.7; max-width:420px; margin: 0 auto 28px; }
+
+  @media(max-width:700px){
+    header { padding: 16px 20px; }
+    .page  { padding: 32px 16px 60px; }
+    .step-card { padding: 28px 20px 24px; }
+    .logo-grid { grid-template-columns: repeat(2,1fr); }
+    .industry-grid { grid-template-columns: repeat(3,1fr); }
+    .services-grid { grid-template-columns: repeat(2,1fr); }
+    .step-heading { font-size: 1.2rem; }
+  }
+  @media(max-width:420px){
+    .industry-grid { grid-template-columns: repeat(2,1fr); }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+<div class="glow g1"></div>
+<div class="glow g2"></div>
+<div class="glow g3"></div>
+
+<!-- HEADER -->
+<header>
+  <a href="index.html" class="logo-link">
+    <div class="logo-icon">👑</div>
+    <div class="logo-text">Nexus<span>Digital</span></div>
+  </a>
+  <a href="tel:9178311976" class="hdr-phone">📞 917-831-1976</a>
+</header>
+
+<!-- PAGE -->
+<div class="page">
+
+  <!-- Progress indicators -->
+  <div class="progress-block" id="progressBlock">
+    <div class="step-indicators">
+      <div class="step-dot active" id="dot1">1</div>
+      <div class="step-line"><div class="step-line-fill" id="line1" style="width:0%"></div></div>
+      <div class="step-dot" id="dot2">2</div>
+      <div class="step-line"><div class="step-line-fill" id="line2" style="width:0%"></div></div>
+      <div class="step-dot" id="dot3">3</div>
+      <div class="step-line"><div class="step-line-fill" id="line3" style="width:0%"></div></div>
+      <div class="step-dot" id="dot4">4</div>
+    </div>
+    <div class="progress-meta">
+      <span id="stepMeta">Step 1 of 4</span>
+      <span id="stepPct">25%</span>
+    </div>
+  </div>
+
+  <!-- STEP CARD -->
+  <div class="step-card" id="stepCard">
+
+    <!-- ── STEP 1: Logo Type ── -->
+    <div class="step active" id="step1">
+      <div class="step-eyebrow">Step 1 — Logo Style</div>
+      <h2 class="step-heading">Please Select Logo Type</h2>
+      <div class="logo-grid">
+        <div class="logo-card" onclick="selectOne(this,'.logo-card')">
+          <div class="logo-swatch ls-1">GENESIS<br>WORDPRESS THEME</div>
+        </div>
+        <div class="logo-card" onclick="selectOne(this,'.logo-card')">
+          <div class="logo-swatch ls-2">EOC<br>Erik ONe Call</div>
+        </div>
+        <div class="logo-card" onclick="selectOne(this,'.logo-card')">
+          <div class="logo-swatch ls-3">AR<br>ARCTIC ROCK</div>
+        </div>
+        <div class="logo-card" onclick="selectOne(this,'.logo-card')">
+          <div class="logo-swatch ls-4">Saffron</div>
+        </div>
+        <div class="logo-card" onclick="selectOne(this,'.logo-card')">
+          <div class="logo-swatch ls-5">CSF</div>
+        </div>
+        <div class="logo-card" onclick="selectOne(this,'.logo-card')">
+          <div class="logo-swatch ls-6">HAMILTON</div>
+        </div>
+      </div>
+      <div class="type-description">
+        <h4>Wordmark &amp; Typography</h4>
+        <p>Text Only logo designs impose the name of the brand rather than its icon. Used by many luxury brands.</p>
+      </div>
+      <div class="nav-row">
+        <button class="btn-next" onclick="goStep(2)">Continue →</button>
+      </div>
+      <div class="skip-row"><button class="skip-btn" onclick="goStep(2)">Skip this &gt;&gt;</button></div>
+    </div>
+
+    <!-- ── STEP 2: Industry ── -->
+    <div class="step" id="step2">
+      <div class="step-eyebrow">Step 2 — Your Industry</div>
+      <h2 class="step-heading">Please Select Your Industry</h2>
+      <div class="industry-grid">
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">🌾</div><span>Agriculture &amp; Outdoor</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">📷</div><span>Art &amp; Photography</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">💆</div><span>Beauty &amp; Spa</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">🏗️</div><span>Building &amp; Construction</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">📈</div><span>Business &amp; Finance</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">🚚</div><span>Delivery &amp; Transport</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">🎓</div><span>Education</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">⚡</div><span>Electronics &amp; Energy</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">👗</div><span>Fashion</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">🍔</div><span>Food &amp; Drinks</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">🎮</div><span>Games &amp; Betting</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">❤️</div><span>Health &amp; Medical</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">🏠</div><span>Home Services</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">⚖️</div><span>Law</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">🕌</div><span>Religious</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">🎵</div><span>Music &amp; Media</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">🏘️</div><span>Real Estate</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">🔬</div><span>Science</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">🔒</div><span>Security</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">💪</div><span>Sports &amp; Fitness</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">💻</div><span>Tech</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">✈️</div><span>Travel &amp; Tourism</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">🐾</div><span>Pet &amp; Animal</span></div>
+        <div class="ind-item" onclick="selectOne(this,'.ind-item')"><div class="ind-icon">🌐</div><span>Others</span></div>
+      </div>
+      <div class="nav-row">
+        <button class="btn-back" onclick="goStep(1)">← Back</button>
+        <button class="btn-next" onclick="goStep(3)">Continue →</button>
+      </div>
+      <div class="skip-row"><button class="skip-btn" onclick="goStep(3)">Skip this &gt;&gt;</button></div>
+    </div>
+
+    <!-- ── STEP 3: Design Services ── -->
+    <div class="step" id="step3">
+      <div class="step-eyebrow">Step 3 — Services</div>
+      <h2 class="step-heading">Please Select Design Services</h2>
+      <div class="services-grid">
+        <div class="svc-card" onclick="toggleSelect(this)">
+          <div class="svc-thumb t-logo">🏷️</div>
+          <div class="svc-info"><h4>Logo</h4><p>From Rs.6,679</p></div>
+        </div>
+        <div class="svc-card" onclick="toggleSelect(this)">
+          <div class="svc-thumb t-brand">🎨</div>
+          <div class="svc-info"><h4>Branding</h4><p>From Rs.6,679</p></div>
+        </div>
+        <div class="svc-card" onclick="toggleSelect(this)">
+          <div class="svc-thumb t-web">🌐</div>
+          <div class="svc-info"><h4>Website</h4><p>From Rs.88,459</p></div>
+        </div>
+        <div class="svc-card" onclick="toggleSelect(this)">
+          <div class="svc-thumb t-biz">💼</div>
+          <div class="svc-info"><h4>Business Cards</h4><p>From Rs.2,619</p></div>
+        </div>
+        <div class="svc-card" onclick="toggleSelect(this)">
+          <div class="svc-thumb t-app">📱</div>
+          <div class="svc-info"><h4>Mobile App</h4><p>From Rs.166,159</p></div>
+        </div>
+        <div class="svc-card" onclick="toggleSelect(this)">
+          <div class="svc-thumb t-mkt">📣</div>
+          <div class="svc-info"><h4>Digital Marketing</h4><p>From Rs.3,285</p></div>
+        </div>
+        <div class="svc-card" onclick="toggleSelect(this)">
+          <div class="svc-thumb t-lanim">✨</div>
+          <div class="svc-info"><h4>Logo Animation</h4><p>From Rs.40,759</p></div>
+        </div>
+        <div class="svc-card" onclick="toggleSelect(this)">
+          <div class="svc-thumb t-vanim">🎬</div>
+          <div class="svc-info"><h4>Video Animation</h4><p>From Rs.54,389</p></div>
+        </div>
+      </div>
+      <div class="nav-row">
+        <button class="btn-back" onclick="goStep(2)">← Back</button>
+        <button class="btn-next" onclick="goStep(4)">Continue →</button>
+      </div>
+      <div class="skip-row"><button class="skip-btn" onclick="goStep(4)">Skip this &gt;&gt;</button></div>
+    </div>
+
+    <!-- ── STEP 4: Business Info ── -->
+    <div class="step" id="step4">
+      <div class="step-eyebrow">Step 4 — About You</div>
+      <h2 class="step-heading">Please Tell Us About Your Business</h2>
+      <div class="field">
+        <label>Company Name</label>
+        <input type="text" id="bizName" placeholder="Company Name"/>
+      </div>
+      <div class="field">
+        <label>Products / Services</label>
+        <textarea id="bizDesc" placeholder="Tell Us About Your Products/Services"></textarea>
+      </div>
+      <div class="field">
+        <label>Email Address</label>
+        <input type="email" id="bizEmail" placeholder="Email Address"/>
+      </div>
+      <div class="field">
+  <label>Phone Number <span style="color:#ef4444">*</span></label>
+  <input type="tel" id="bizPhone" placeholder="Phone Number"/>
+  <span class="error-msg" id="phoneError">⚠ Please enter a valid phone number</span>
+</div>
+      <div class="nav-row">
+        <button class="btn-back" onclick="goStep(3)">← Back</button>
+        <button class="btn-submit" onclick="submitForm()">Get 50% Discount →</button>
+      </div>
+      <div class="skip-row"><button class="skip-btn" onclick="submitForm()">Skip this &gt;&gt;</button></div>
+    </div>
+
+  </div><!-- /step-card -->
+
+  <!-- SUCCESS -->
+  <div class="success-wrap" id="successWrap">
+    <div class="success-icon">✅</div>
+    <h2>You're All Set!</h2>
+    <p>Our team will reach out within 24 hours with your <strong>custom logo proposal</strong> and your <strong>50% discount</strong> applied automatically.</p>
+    <button class="btn-next" style="max-width:260px;margin:0 auto;" onclick="window.location.href='index.html'">
+      ← Back to Home
+    </button>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+/* ── PARTICLES ── */
+(function(){
+  const c = document.getElementById('particles');
+  const ctx = c.getContext('2d');
+  let W, H, pts=[], mouse={x:-999,y:-999};
+  function resize(){ W=c.width=innerWidth; H=c.height=innerHeight; }
+  resize(); addEventListener('resize',resize);
+  for(let i=0;i<70;i++) pts.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.4+.4});
+  document.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1; if(p.y<0||p.y>H)p.vy*=-1;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(147,197,253,0.45)'; ctx.fill();
+    });
+    for(let i=0;i<pts.length;i++){
+      for(let j=i+1;j<pts.length;j++){
+        const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y, d=Math.hypot(dx,dy);
+        if(d<110){ ctx.beginPath(); ctx.moveTo(pts[i].x,pts[i].y); ctx.lineTo(pts[j].x,pts[j].y); ctx.strokeStyle=`rgba(37,99,235,${.14*(1-d/110)})`; ctx.lineWidth=.5; ctx.stroke(); }
+      }
+      const md=Math.hypot(pts[i].x-mouse.x,pts[i].y-mouse.y);
+      if(md<150){ ctx.beginPath(); ctx.moveTo(pts[i].x,pts[i].y); ctx.lineTo(mouse.x,mouse.y); ctx.strokeStyle=`rgba(6,182,212,${.18*(1-md/150)})`; ctx.lineWidth=.7; ctx.stroke(); }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── STEP LOGIC ── */
+let cur = 1;
+const total = 4;
+
+// Pre-fill company name from URL param
+window.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const company = params.get('company');
+  if (company) {
+    const el = document.getElementById('bizName');
+    if (el) el.value = decodeURIComponent(company);
+  }
+});
+
+function goStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step' + n).classList.add('active');
+  cur = n;
+  updateProgress();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function updateProgress() {
+  for (let i = 1; i <= total; i++) {
+    const dot = document.getElementById('dot' + i);
+    dot.classList.remove('done','active');
+    if (i < cur)  dot.classList.add('done');
+    if (i === cur) dot.classList.add('active');
+    if (i < total) {
+      document.getElementById('line' + i).style.width = i < cur ? '100%' : '0%';
+    }
+  }
+  const pct = Math.round((cur / total) * 100);
+  document.getElementById('stepMeta').textContent = `Step ${cur} of ${total}`;
+  document.getElementById('stepPct').textContent   = pct + '%';
+}
+
+function selectOne(el, selector) {
+  document.querySelectorAll(selector).forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function toggleSelect(el) { el.classList.toggle('selected'); }
+
+function submitForm() {
+  const phone = document.getElementById('bizPhone');
+  const phoneError = document.getElementById('phoneError');
+
+  // reset any previous error
+  phone.classList.remove('error');
+  phoneError.classList.remove('show');
+
+  // check digits only — must have at least 7
+  const digits = phone.value.trim().replace(/\D/g, '');
+  if (digits.length < 7) {
+    phone.classList.add('error');
+    phoneError.classList.add('show');
+    phone.focus();
+    return; // stop here — don't show success
+  }
+
+  // phone is valid — show success screen
+  document.getElementById('stepCard').style.display     = 'none';
+  document.getElementById('progressBlock').style.display = 'none';
+  document.getElementById('successWrap').classList.add('active');
+}
+</script>
+</body>
+</html>

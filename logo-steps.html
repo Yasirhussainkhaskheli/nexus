@@ -56,9 +56,9 @@
   /* ── PAGE WRAPPER ── */
   .page {
     position: relative; z-index: 5;
-    max-width: 1220px;
+    max-width: 1500px;
     margin: 0 auto;
-    padding: 52px 32px 80px;
+    padding: 52px 40px 80px;
   }
 
   /* ── PROGRESS ── */
@@ -110,8 +110,8 @@
   .logo-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 26px;
-    margin-bottom: 34px;
+    gap: 30px;
+    margin-bottom: 36px;
   }
   .logo-card {
     background: rgba(255,255,255,0.04);
@@ -132,7 +132,7 @@
   }
   .logo-preview {
     width: 100%;
-    aspect-ratio: 1 / 1.08;
+    aspect-ratio: 16 / 11;
     object-fit: cover;
     display: block;
     background: #10163d;
@@ -217,9 +217,11 @@
   .field input:focus, .field textarea:focus { border-color: var(--accent2); }
   .field input::placeholder, .field textarea::placeholder { color: var(--muted); }
   .field textarea { resize: vertical; min-height: 90px; }
-  .field input.error { border-color: #ef4444; animation: shake 0.35s ease; }
+.field input.error, .selection-error { border-color: #ef4444 !important; animation: shake 0.35s ease; }
 .field .error-msg { font-size: .7rem; color: #ef4444; margin-top: 5px; display: none; }
 .field .error-msg.show { display: block; }
+.step-error-msg { display:none; color:#fca5a5; font-size:.78rem; font-weight:600; margin: 18px 0 0; }
+.step-error-msg.show { display:block; }
 @keyframes shake {
   0%,100% { transform: translateX(0); }
   20%      { transform: translateX(-6px); }
@@ -282,11 +284,14 @@
   .success-message { color: var(--text); font-weight: 600; }
 
 
+  @media(max-width:900px){
+    .logo-grid { grid-template-columns: repeat(2,1fr); gap: 22px; }
+  }
   @media(max-width:700px){
     header { padding: 16px 20px; }
     .page  { padding: 32px 16px 60px; }
     .step-card { padding: 28px 20px 24px; }
-    .logo-grid { grid-template-columns: repeat(2,1fr); gap: 18px; }
+    .logo-grid { gap: 18px; }
     .industry-grid { grid-template-columns: repeat(3,1fr); }
     .services-grid { grid-template-columns: repeat(2,1fr); }
     .step-heading { font-size: 1.2rem; }
@@ -339,8 +344,8 @@
 
     <!-- ── STEP 1: Logo Type ── -->
     <div class="step active" id="step1">
-      <div class="step-eyebrow">Step 1 - Types of the Logo</div>
-      <h2 class="step-heading">Please Select Types of the Logo</h2>
+      <div class="step-eyebrow">Step 1 - Logo Type</div>
+      <h2 class="step-heading">Please tell where you will be using this logo?</h2>
       <div class="logo-grid">
         <div class="logo-card" onclick="selectOne(this,'.logo-card')">
           <img class="logo-preview" src="assets/abstract.png" alt="Wordmark and typography logo examples" />
@@ -386,9 +391,8 @@
         </div>
       </div>
       <div class="nav-row">
-        <button class="btn-next" onclick="goStep(2)">Continue →</button>
+        <button class="btn-next" onclick="nextStep(2)">Continue →</button>
       </div>
-      <div class="skip-row"><button class="skip-btn" onclick="goStep(2)">Skip this &gt;&gt;</button></div>
     </div>
 
     <!-- ── STEP 2: Industry ── -->
@@ -423,7 +427,7 @@
       </div>
       <div class="nav-row">
         <button class="btn-back" onclick="goStep(1)">← Back</button>
-        <button class="btn-next" onclick="goStep(3)">Continue →</button>
+        <button class="btn-next" onclick="nextStep(3)">Continue →</button>
       </div>
       <div class="skip-row"><button class="skip-btn" onclick="goStep(3)">Skip this &gt;&gt;</button></div>
     </div>
@@ -468,7 +472,7 @@
       </div>
       <div class="nav-row">
         <button class="btn-back" onclick="goStep(2)">← Back</button>
-        <button class="btn-next" onclick="goStep(4)">Continue →</button>
+        <button class="btn-next" onclick="nextStep(4)">Continue →</button>
       </div>
       <div class="skip-row"><button class="skip-btn" onclick="goStep(4)">Skip this &gt;&gt;</button></div>
     </div>
@@ -476,7 +480,7 @@
     <!-- ── STEP 4: Business Info ── -->
     <div class="step" id="step4">
       <div class="step-eyebrow">Step 4 — About You</div>
-      <h2 class="step-heading">Please Tell Us About Your Business</h2>
+      <h2 class="step-heading">Your business / services details?</h2>
       <div class="field">
         <label>Company Name</label>
         <input type="text" id="bizName" placeholder="Company Name"/>
@@ -506,8 +510,8 @@
   <!-- SUCCESS -->
   <div class="success-wrap" id="successWrap">
     <div class="success-icon">OK</div>
-    <h2>You're All Set!</h2>
-    <p class="success-message">Connecting you to the live agent now!</p>
+    <h2>OK, you are all set.</h2>
+    <p class="success-message">Connecting to live chat agent.</p>
     <button class="btn-next" style="max-width:260px;margin:0 auto;" onclick="window.location.href='index.html'">
       Back to Home
     </button>
@@ -564,8 +568,57 @@ function goStep(n) {
   document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
   document.getElementById('step' + n).classList.add('active');
   cur = n;
+  clearStepSelectionError();
   updateProgress();
   window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function clearStepSelectionError() {
+  document.querySelectorAll('.step-error-msg').forEach(msg => msg.classList.remove('show'));
+  document.querySelectorAll('.selection-error').forEach(el => el.classList.remove('selection-error'));
+}
+
+function showStepSelectionError(stepEl, targetSelector, message) {
+  let msg = stepEl.querySelector('.step-error-msg');
+  if (!msg) {
+    msg = document.createElement('div');
+    msg.className = 'step-error-msg';
+    const nav = stepEl.querySelector('.nav-row');
+    const grid =
+      stepEl.querySelector('.logo-grid') ||
+      stepEl.querySelector('.industry-grid') ||
+      stepEl.querySelector('.services-grid');
+    if (grid) {
+      grid.insertAdjacentElement('afterend', msg);
+    } else {
+      stepEl.insertBefore(msg, nav);
+    }
+  }
+  msg.textContent = message;
+  msg.classList.add('show');
+  stepEl.querySelectorAll(targetSelector).forEach(el => el.classList.add('selection-error'));
+}
+
+function nextStep(targetStep) {
+  const currentStep = document.getElementById('step' + cur);
+  clearStepSelectionError();
+
+  if (cur === 1 && !currentStep.querySelector('.logo-card.selected')) {
+    showStepSelectionError(currentStep, '.logo-card', 'Please select a logo type to continue.');
+    return;
+  }
+
+  if (cur === 2 && !currentStep.querySelector('.ind-item.selected')) {
+    showStepSelectionError(currentStep, '.ind-item', 'Please select an industry or use Skip this.');
+    return;
+  }
+
+  if (cur === 3 && !currentStep.querySelector('.svc-card.selected')) {
+    showStepSelectionError(currentStep, '.svc-card', 'Please select at least one service or use Skip this.');
+    return;
+  }
+
+  goStep(targetStep);
 }
 
 function updateProgress() {
@@ -586,8 +639,12 @@ function updateProgress() {
 function selectOne(el, selector) {
   document.querySelectorAll(selector).forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
+  clearStepSelectionError();
 }
-function toggleSelect(el) { el.classList.toggle('selected'); }
+function toggleSelect(el) {
+  el.classList.toggle('selected');
+  clearStepSelectionError();
+}
 
 function getBusinessFields() {
   return [

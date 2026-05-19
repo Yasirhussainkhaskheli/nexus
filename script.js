@@ -580,7 +580,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (companyInput) {
     companyInput.focus();
     companyInput.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") {
+      if (e.key === "Enter" || ((e.metaKey || e.ctrlKey) && e.key === "Enter")) {
         e.preventDefault();
         goToSteps();
       }

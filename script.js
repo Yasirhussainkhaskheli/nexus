@@ -67,17 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentPortfolioFilter = "all";
   let currentAllRows = initialPortfolioRows;
 
-  function shuffleItems(items) {
-    const shuffled = [...items];
-    for (let i = shuffled.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-  }
-
-  const shuffledPortfolioItems = shuffleItems(portfolioItems);
-
   function getPortfolioColumnCount() {
     const columns = window.getComputedStyle(portfolioGrid).gridTemplateColumns;
     return Math.max(columns.split(" ").filter(Boolean).length, 1);
@@ -92,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function updatePortfolioView() {
     const sourceItems =
       currentPortfolioFilter === "all"
-        ? shuffledPortfolioItems
+        ? portfolioItems
         : portfolioItems.filter(
             (item) => item.dataset.category === currentPortfolioFilter,
           );

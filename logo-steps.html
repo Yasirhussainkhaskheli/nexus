@@ -588,6 +588,46 @@ function selectOne(el, selector) {
   el.classList.add('selected');
 }
 function toggleSelect(el) { el.classList.toggle('selected'); }
+
+function getBusinessFields() {
+  return [
+    document.getElementById('bizName'),
+    document.getElementById('bizDesc'),
+    document.getElementById('bizEmail'),
+    document.getElementById('bizPhone'),
+  ].filter(Boolean);
+}
+
+function focusNextBusinessField(currentField) {
+  const fields = getBusinessFields();
+  const currentIndex = fields.indexOf(currentField);
+  const nextEmpty = fields.find(field => !field.value.trim());
+
+  if (nextEmpty && nextEmpty !== currentField) {
+    nextEmpty.focus();
+    return;
+  }
+
+  if (currentIndex >= 0 && currentIndex < fields.length - 1) {
+    fields[currentIndex + 1].focus();
+    return;
+  }
+
+  if (fields.every(field => field.value.trim())) {
+    submitForm();
+  }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  getBusinessFields().forEach(field => {
+    field.addEventListener('keydown', event => {
+      if (event.key !== 'Enter') return;
+      event.preventDefault();
+      focusNextBusinessField(field);
+    });
+  });
+});
+
 function submitForm() {
   const phone = document.getElementById('bizPhone');
   const phoneError = document.getElementById('phoneError');
